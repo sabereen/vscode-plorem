@@ -1,8 +1,8 @@
 {
   "name": "plorem",
   "displayName": "Persian Quran Lorem",
-  "description": "Persian random text generator by Quran ayahs",
-  "version": "0.0.1",
+  "description": "Persian random text generator based on Quran translation",
+  "version": "0.0.2",
   "publisher": "mqt",
   "icon": "icon.png",
   "license": "MIT",
@@ -27,8 +27,8 @@
   "contributes": {
     "commands": [
       {
-        "command": "extension.GenerateLorem",
-        "title": "Persian Lorem"
+        "command": "extension.GenerateText",
+        "title": "Persian Quran Lorem"
       }
     ]
   },

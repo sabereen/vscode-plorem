@@ -1,20 +1,12 @@
 # Persian Lorem
 
-Simple persian lorem ipsum generator (based on [abolix/Persian-Lorem](https://github.com/abolix/Persian-Lorem))
-
-## Install
-
-1. Open VS Code
-2. Press F1
-3. Type "install"
-4. Select "Extensions: Install Extension".
-5. Select Persian Lorem from the list
+This is a persian random text generator based on Quran translation.
 
 ## Usage
 
 1. Press F1 or `ctrl + shift + p` then enter 'Persian Lorem'
-2. Type how many words you want to generate ( empty for 1 paragraph )
+2. Type how many words you want to generate (empty for 1 Quran ayah)
 
 ### Or
 
-In your editor , type `plorem` to generate 1 paragraph of lorem ipsum or use `plorem` with number (example : `lorem20`) to generate 20 words .
+In your editor , type `plorem` to generate 1 random Quran ayah or use `plorem` with number (example : `lorem20`) to generate 20 words .
