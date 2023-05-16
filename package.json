@@ -1,7 +1,7 @@
 {
-  "name": "persian-lorem",
-  "displayName": "Persian Lorem",
-  "description": "Persian Lorem Ipsum Generator",
+  "name": "plorem",
+  "displayName": "Persian Quran Lorem",
+  "description": "Persian random text generator by Quran ayahs",
   "version": "0.0.1",
   "publisher": "mqt",
   "icon": "icon.png",
