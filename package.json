@@ -15,7 +15,7 @@
   },
   "homepage": "https://github.com/sabereen/vscode-plorem/",
   "engines": {
-    "vscode": "^1.45.0"
+    "vscode": "^1.78.0"
   },
   "categories": [
     "Other"
