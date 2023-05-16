@@ -1,91 +1,76 @@
-import * as vscode from "vscode"
+import * as vscode from 'vscode'
 import { getRandomText } from './quran'
 import {
-  Command,
-  TriggerCharacters,
-  CommandNumberRegExp,
-} from "./const";
+  command,
+  triggerCharacters,
+  commandNumberRegExp,
+} from './const'
 
-const insertText = (Words: number) => {
-  var editor: any = vscode.window.activeTextEditor;
-  editor.edit((edit: any) =>
-    editor.selections.forEach((selection: any) => {
-      edit.delete(selection);
-      edit.insert(selection.start, PersianLorem(Words));
+function insertText(wordsCount: number) {
+  const editor = vscode.window.activeTextEditor
+  editor?.edit(edit => {
+    editor.selections.forEach(selection => {
+      edit.delete(selection)
+      edit.insert(selection.start, getRandomText(wordsCount))
     })
-  );
-};
+  })
+}
 
-const PersianLorem = (Words: number) => {
-  return getRandomText(Words)
-};
-
-const extractNumber = (
+function extractCount(
   document: vscode.TextDocument,
   position: vscode.Position,
-): number => {
-  const replaceCommandFromLastGroup = (
-    matchGroup: RegExpMatchArray,
-  ): number => {
-    const lastGroup = matchGroup[matchGroup.length - 1];
-
-    if (lastGroup === Command) {
-      return 0;
-    }
-    return parseInt(lastGroup.replace(Command, ""));
-  };
-
-  const line: string = document.lineAt(position).text;
-  const matchGroup: RegExpMatchArray | null = line.match(CommandNumberRegExp);
-
-  return matchGroup !== null ? replaceCommandFromLastGroup(matchGroup) : 0;
-};
+): number {
+  const line = document.lineAt(position).text
+  const matchResult = commandNumberRegExp.exec(line)
+  if (!matchResult) return 0
+  return +matchResult[1]
+}
 
 export function activate(context: vscode.ExtensionContext) {
   const AutoCompletion = vscode.languages.registerCompletionItemProvider(
-    "*",
+    '*',
     {
       provideCompletionItems(
         document: vscode.TextDocument,
         position: vscode.Position,
       ) {
-        const WordCount = extractNumber(document, position);
-        const VsCommand = new vscode.CompletionItem(Command);
-        VsCommand.insertText = new vscode.SnippetString(
-          PersianLorem(WordCount),
-        );
-        VsCommand.label = `${Command}${WordCount || ""}`;
+        const wordsCount = extractCount(document, position)
+        const vsCommand = new vscode.CompletionItem(command)
+        vsCommand.insertText = new vscode.SnippetString(
+          getRandomText(wordsCount),
+        )
+        vsCommand.label = `${command}${wordsCount || ''}`
 
-        var Documentation = "";
-        WordCount === 0
-          ? (Documentation = "Generate 1 Paragraph of Persian Lorem")
-          : (Documentation = `Generate ${WordCount} Words of Persian Lorem`);
-        VsCommand.documentation = new vscode.MarkdownString(Documentation);
-        return [VsCommand];
+        const documentation = wordsCount
+          ? `به صورت تصادفی تعداد ${wordsCount.toLocaleString('fa')} واژه از ترجمه‌ی قرآن را درج می‌کند.\u{200f}`
+          : 'ترجمه یکی از آیات قرآن را به صورت تصادفی درج می‌کند.\u{200f}'
+
+        vsCommand.documentation = new vscode.MarkdownString(documentation)
+        return [vsCommand]
       },
     },
-    ...TriggerCharacters,
-  );
-  context.subscriptions.push(AutoCompletion);
+    ...triggerCharacters,
+  )
+  context.subscriptions.push(AutoCompletion)
 
   ////////////////////
   // Command
   ////////////////////
 
   let disposable = vscode.commands.registerCommand(
-    "extension.GenerateLorem",
+    'extension.GenerateLorem',
     () => {
       vscode.window
         .showInputBox({
-          placeHolder: "How many words ? ( empty for 1 paragraph )",
+          placeHolder: 'چند کلمه تصادفی درج شود؟\u{200f}',
           prompt:
-            "Type how many words you want to insert ( empty for 1 paragraph ) ",
+            'چند واژه تصادفی لازم دارید؟ (خالی بودن به معنای یک آیه است).\u{200f}',
         })
-        .then((words: any) => {
-          insertText(words);
-        });
+        .then((words = '') => {
+          insertText(+words)
+        })
     },
-  );
-  context.subscriptions.push(disposable);
+  )
+  context.subscriptions.push(disposable)
 }
 export function deactivate() {}
