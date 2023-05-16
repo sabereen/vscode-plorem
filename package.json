@@ -2,27 +2,25 @@
   "name": "persian-lorem",
   "displayName": "Persian Lorem",
   "description": "Persian Lorem Ipsum Generator",
-  "version": "1.0.0",
-  "publisher": "Abolfazl",
+  "version": "0.0.1",
+  "publisher": "MQT",
   "icon": "icon.png",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/abolix/Persian-Lorem/"
+    "url": "https://github.com/sabereen/vscode-plorem/"
   },
   "bugs": {
-    "url": "https://github.com/abolix/Persian-Lorem/issues"
+    "url": "https://github.com/sabereen/vscode-plorem/issues"
   },
-  "homepage": "https://github.com/abolix/Persian-Lorem/",
+  "homepage": "https://github.com/sabereen/vscode-plorem/",
   "engines": {
     "vscode": "^1.45.0"
   },
   "categories": [
     "Other"
   ],
-  "activationEvents": [
-    "*"
-  ],
+  "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [

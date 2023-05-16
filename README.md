@@ -1,6 +1,6 @@
 # Persian Lorem
 
-Simple persian lorem ipsum generator
+Simple persian lorem ipsum generator (based on [abolix/Persian-Lorem](https://github.com/abolix/Persian-Lorem))
 
 ## Install
 

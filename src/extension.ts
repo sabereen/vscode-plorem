@@ -1,9 +1,9 @@
-import * as vscode from "vscode";
+import * as vscode from "vscode"
+import { getRandomText } from './quran'
 import {
   Command,
   TriggerCharacters,
   CommandNumberRegExp,
-  LoremText,
 } from "./const";
 
 const insertText = (Words: number) => {
@@ -16,21 +16,8 @@ const insertText = (Words: number) => {
   );
 };
 
-const PersianLorem = (Words: any) => {
-  var LoremReturn: string = "";
-  if (Words.length === 0 || Words === 0) {
-    return LoremText;
-  }
-  var LoremSplited: string[] = LoremText.split(" ");
-  var SentenceReset = 0;
-  for (var i = 0; i < Words; i++) {
-    if (SentenceReset === LoremSplited.length) {
-      SentenceReset = 0;
-    }
-    LoremReturn += LoremSplited[SentenceReset] + " ";
-    SentenceReset++;
-  }
-  return LoremReturn;
+const PersianLorem = (Words: number) => {
+  return getRandomText(Words)
 };
 
 const extractNumber = (
