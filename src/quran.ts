@@ -1,5 +1,10 @@
 import { ayat } from './fa.ansarian'
 
+/**
+ * متن را پاکسازی می‌کند، یعنی پرانتزها، براکت‌ها و... را حذف می‌کند
+ * @param text - متنی که قرار است پاکسازی شود
+ * @returns متن پاکسازی شده
+ */
 function clearText(text: string) {
   return text
     .replace(/[\(\)]/g, '')
@@ -9,6 +14,11 @@ function clearText(text: string) {
     .replace(/\[/g, '')
 }
 
+/**
+ * متنی تصادفی از قرآن را بر می‌گرداند
+ * @param wordsCount - تعداد کلمات متن تصادفی تولیدی
+ * @returns متن تصادفی
+ */
 export function getRandomText(wordsCount?: number) {
   let randomAyahIndex = ~~(Math.random() * ayat.length)
   if (!wordsCount) {
